@@ -1,0 +1,28 @@
+{
+  "name": "UserInvitationEvent",
+  "namespace": "com.citse.kunduApp.avro",
+  "doc": "Evento publicado cuando un usuario reserva una invitacion en Kundu. Es el unico registro de la invitacion (no se guarda en base de datos).",
+  "type": "record",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "email",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "userId",
+      "type": ["null", "int"],
+      "default": null
+    },
+    {
+      "name": "reservedAt",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}

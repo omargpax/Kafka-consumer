@@ -1,0 +1,5 @@
+kora-api-consumer/target/
+kora-api-consumer/.idea/
+*.iml
+kora-api-consumer/.vscode/
+kora-api-consumer/.mvn/wrapper/maven-wrapper.jar

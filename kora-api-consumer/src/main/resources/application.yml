@@ -1,0 +1,57 @@
+# ============================================================
+#  kora-api-consumer
+#  Consume user-invitation-topic y guarda las invitaciones nuevas en tax_invitations (BD dbo_kundu)
+# ============================================================
+application:
+  kafka-values:
+    topic: ${KAFKA_INVITATION_TOPIC:user-invitation-topic}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:19092}
+    schema:
+      registry:
+        url: ${SCHEMA_REGISTRY_URL:http://localhost:8081}
+    consumer:
+      group-id: kora-api-consumer-cg01
+      max-poll-records: 10
+      max-poll-interval-ms: 30000
+      avro-reader: true
+      auto-offset-reset: earliest
+      auto-commit: false
+      retry-backoff-ms: 3000
+  security:
+    jwt:
+      # DEBE ser la misma clave (Base64) que usa Kundu-api-quarkus para firmar los tokens
+      secret-key: "${JWT_SECRET_KEY:jdsntO+U9tvOVEyqQ1MPNs09zhZtPdf4Bk1WYHOthfhSian0U+wP4iODDDIajgfQlVXmJ7F/AHiTRGLhJHFzSw==}"
+
+quarkus:
+  application:
+    name: kora-api-consumer
+  log:
+    level: INFO
+    category:
+      com.citse.kora:
+        level: DEBUG
+  http:
+    port: ${SERVER_PORT:8183}
+    auth:
+      permission:
+        authenticated:
+          paths: /*
+          policy: authenticated
+  devservices:
+    enabled: false
+  kafka:
+    devservices:
+      enabled: false
+  datasource:
+    db-kind: postgresql
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    jdbc:
+      url: ${DB_URL:jdbc:postgresql://localhost:5432/dbo_kundu}
+  hibernate-orm:
+    schema-management:
+      strategy: none
+    physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    log:
+      sql: false
+      format-sql: true

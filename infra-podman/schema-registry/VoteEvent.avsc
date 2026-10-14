@@ -1,0 +1,28 @@
+{
+  "name": "VoteEvent",
+  "namespace": "pe.marcolopez.apps.avro",
+  "doc": "Informacion de Voto Electronico",
+  "type": "record",
+  "fields": [
+    {
+      "name": "voterId",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "pollId",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "optionId",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "votedAt",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}
